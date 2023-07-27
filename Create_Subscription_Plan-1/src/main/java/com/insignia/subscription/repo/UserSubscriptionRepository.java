@@ -60,4 +60,18 @@ public interface UserSubscriptionRepository extends JpaRepository<SubscriptionDe
     @Query(value = "DELETE FROM subscription_plan_master_table WHERE plan_id = :plan_id", nativeQuery = true)
     void deleteSubscriptionPlan(@Param("plan_id") String planId);
 	
+	@Transactional
+    @Modifying
+    @Query(value = "UPDATE subscription_plan_master_table " +
+            "SET plan_activation_status = 'active' " +
+            "WHERE plan_id = :plan_id", nativeQuery = true)
+    void activateSubscriptionPlan(@Param("plan_id") String planId);
+	
+	@Transactional
+    @Modifying
+    @Query(value = "UPDATE subscription_plan_master_table " +
+            "SET plan_activation_status = 'inactive' " +
+            "WHERE plan_id = :plan_id", nativeQuery = true)
+    void deactivateSubscriptionPlan(@Param("plan_id") String planId);
+	
 }

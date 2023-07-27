@@ -1,5 +1,7 @@
 package com.insignia.subscription.controller;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +20,8 @@ import com.insignia.subscription.service.SubscriptionServiceInterface;
 @RequestMapping("/subscriptions")
 public class SubscriptionSystemController {
 
-	@Autowired
-	private UserSubscriptionRepository userRepo;
+//	@Autowired
+//	private UserSubscriptionRepository userRepo;
 	
     @Autowired
     private SubscriptionServiceInterface subscriptionServiceInterface;
@@ -29,54 +31,70 @@ public class SubscriptionSystemController {
     	
     	try {
             return subscriptionServiceInterface.createSubscriptionPlan(subscriptionRequest);
-        } catch (DataIntegrityViolationException e) {
+        } catch (SQLException e) {
             // Handle DataIntegrityViolationException (e.g., duplicate key)
             SubscriptionResponse response = new SubscriptionResponse();
             response.setSuccess(false);
             response.setErrorCode(SubscriptionConstants.ERROR_CODE_DATA_INTEGRITY);
-            response.setErrorMessage(SubscriptionConstants.ERROR_MESSAGE_DATA_INTEGRITY);
+            response.setErrorMessage(e.getMessage());
             return response;
-        } /* catch (Exception e) {
-            // Handle other unexpected exceptions
-            SubscriptionResponse response = new SubscriptionResponse();
-            response.setSuccess(false);
-            response.setErrorCode("INTERNAL_SERVER_ERROR");
-            response.setErrorMessage("An internal server error occurred.");
-            return response;
-        }*/
+        } 
     } 
-
+    
     @PostMapping("/modify")
     public SubscriptionResponse modifySubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
     	try {
     		return subscriptionServiceInterface.modifySubscriptionPlan(subscriptionRequest);
-        } catch (DataIntegrityViolationException e) {
-            // Handle DataIntegrityViolationException (e.g., duplicate key)
+        } catch (SQLException e) {
             SubscriptionResponse response = new SubscriptionResponse();
             response.setSuccess(false);
-            response.setErrorCode(SubscriptionConstants.ERROR_CODE_DATA_INTEGRITY);
-            response.setErrorMessage(SubscriptionConstants.ERROR_MESSAGE_DATA_INTEGRITY);
+            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
+            response.setErrorMessage(e.getMessage());
             return response;
-        }      
+        } 
     }
     
     @PostMapping("/delete")
     public SubscriptionResponse deleteSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
     	
-    	String planId = subscriptionRequest.getPlanId();
-        SubscriptionDetails existingPlan = userRepo.findByPlanId(planId).orElse(null);
-
-        if (existingPlan == null) {
-            // Plan with the given planId already exists, handle the exception
-            SubscriptionResponse subscriptionResponse = new SubscriptionResponse();
-            subscriptionResponse.setSuccess(false);
-            subscriptionResponse.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
-            subscriptionResponse.setErrorMessage(SubscriptionConstants.ERROR_MESSAGE_PLAN_NOT_FOUND);
-            return subscriptionResponse;
-        }
-        return subscriptionServiceInterface.deleteSubscriptionPlan(subscriptionRequest);
+    	try {
+    		return subscriptionServiceInterface.deleteSubscriptionPlan(subscriptionRequest);
+    	} catch (SQLException e) {
+            SubscriptionResponse response = new SubscriptionResponse();
+            response.setSuccess(false);
+            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
+            response.setErrorMessage(e.getMessage());
+            return response;
+        } 
+    }
+    
+    @PostMapping("/activate")
+    public SubscriptionResponse activateSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
+    	
+    	try {
+    		return subscriptionServiceInterface.activateSubscriptionPlan(subscriptionRequest);
+    	} catch (SQLException e) {
+            SubscriptionResponse response = new SubscriptionResponse();
+            response.setSuccess(false);
+            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
+            response.setErrorMessage(e.getMessage());
+            return response;
+        } 
+    }
+    
+    @PostMapping("/deactivate")
+    public SubscriptionResponse deactivateSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
+    	
+    	try {
+    		return subscriptionServiceInterface.deactivateSubscriptionPlan(subscriptionRequest);
+    	} catch (SQLException e) {
+            SubscriptionResponse response = new SubscriptionResponse();
+            response.setSuccess(false);
+            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
+            response.setErrorMessage(e.getMessage());
+            return response;
+        } 
     }
 }
 
-    // Other methods for modifying, deleting, activating, and deactivating subscription plans
 

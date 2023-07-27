@@ -10,7 +10,7 @@ public class SubscriptionConstants {
 	public static final String ERROR_MESSAGE_DATA_INTEGRITY = "Plan already exists.";
 
 	// Error codes
-	public static final String ERROR_CODE_INTERNAL_SERVER = "INTERNAL_SERVER_ERROR";
-	public static final String ERROR_CODE_PLAN_NOT_FOUND = "PLAN_NOT_FOUND";
-	public static final String ERROR_CODE_DATA_INTEGRITY = "DATA_INTEGRITY_ERROR";
+	public static final int ERROR_CODE_INTERNAL_SERVER = 500;
+	public static final int ERROR_CODE_PLAN_NOT_FOUND = 506;
+	public static final int ERROR_CODE_DATA_INTEGRITY = 504;
 }

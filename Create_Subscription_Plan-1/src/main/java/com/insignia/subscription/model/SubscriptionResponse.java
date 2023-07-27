@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class SubscriptionResponse {
     private boolean success;
     private boolean deleteStatus;
-    private String errorCode;
+    private int errorCode;
     private String errorMessage;
     private String planId;
     private String planName;
@@ -24,10 +24,10 @@ public class SubscriptionResponse {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	public String getErrorCode() {
+	public int getErrorCode() {
 		return errorCode;
 	}
-	public void setErrorCode(String errorCode) {
+	public void setErrorCode(int errorCode) {
 		this.errorCode = errorCode;
 	}
 	public String getErrorMessage() {
