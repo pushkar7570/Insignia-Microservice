@@ -45,4 +45,9 @@ public class SubscriptionServiceImpl implements SubscriptionServiceInterface{
 //		 TODO Auto-generated method stub
 		return subscriptionDao.deactivateSubscriptionPlan(subscriptionRequest);
 	}
+	@Override
+	public SubscriptionResponse findDetailsByPlanId(SubscriptionRequest subscriptionRequest) {
+//		 TODO Auto-generated method stub
+		return subscriptionDao.findDetailsByPlanId(subscriptionRequest);
+	}
 }

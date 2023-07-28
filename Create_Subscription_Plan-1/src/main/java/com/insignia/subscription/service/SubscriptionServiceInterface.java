@@ -12,4 +12,5 @@ public interface SubscriptionServiceInterface {
 	public SubscriptionResponse deleteSubscriptionPlan(SubscriptionRequest subscriptionRequest) throws SQLException;
 	public SubscriptionResponse activateSubscriptionPlan(SubscriptionRequest subscriptionRequest) throws SQLException;
 	public SubscriptionResponse deactivateSubscriptionPlan(SubscriptionRequest subscriptionRequest) throws SQLException;
+	public SubscriptionResponse findDetailsByPlanId(SubscriptionRequest subscriptionRequest);
 }

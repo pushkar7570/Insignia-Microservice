@@ -13,7 +13,7 @@ public class SubscriptionRequest {
     private String planId;
     private String planName;
     private String planDescription;
-    private Integer planDuration;
+    private int planDuration;
     private BigDecimal planPricing;
     private String planActivationStatus;
     private LocalDateTime planActivationDate;
@@ -36,10 +36,10 @@ public class SubscriptionRequest {
 	public void setPlanDescription(String planDescription) {
 		this.planDescription = planDescription;
 	}
-	public Integer getPlanDuration() {
+	public int getPlanDuration() {
 		return planDuration;
 	}
-	public void setPlanDuration(Integer planDuration) {
+	public void setPlanDuration(int planDuration) {
 		this.planDuration = planDuration;
 	}
 	public BigDecimal getPlanPricing() {

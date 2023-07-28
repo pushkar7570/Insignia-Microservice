@@ -3,17 +3,15 @@ package com.insignia.subscription.controller;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.insignia.subscription.entity.SubscriptionDetails;
 import com.insignia.subscription.constants.SubscriptionConstants;
 import com.insignia.subscription.model.SubscriptionRequest;
 import com.insignia.subscription.model.SubscriptionResponse;
-import com.insignia.subscription.repo.UserSubscriptionRepository;
 import com.insignia.subscription.service.SubscriptionServiceInterface;
 
 @RestController
@@ -94,6 +92,21 @@ public class SubscriptionSystemController {
             response.setErrorMessage(e.getMessage());
             return response;
         } 
+    }
+    
+    @GetMapping("/find")
+    public SubscriptionResponse findDetailsByPlanId(@RequestBody SubscriptionRequest subscriptionRequest) {
+    	
+//    	try {
+//    		return subscriptionServiceInterface.deactivateSubscriptionPlan(subscriptionRequest);
+//    	} catch (SQLException e) {
+//            SubscriptionResponse response = new SubscriptionResponse();
+//            response.setSuccess(false);
+//            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
+//            response.setErrorMessage(e.getMessage());
+//            return response;
+//        } 
+    	return subscriptionServiceInterface.findDetailsByPlanId(subscriptionRequest);
     }
 }
 
