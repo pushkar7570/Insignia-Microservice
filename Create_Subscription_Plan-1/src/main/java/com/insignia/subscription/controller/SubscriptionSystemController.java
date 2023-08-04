@@ -1,14 +1,15 @@
 package com.insignia.subscription.controller;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.insignia.customExceptions.InvalidInputParametersException;
 import com.insignia.subscription.constants.SubscriptionConstants;
 import com.insignia.subscription.model.SubscriptionRequest;
 import com.insignia.subscription.model.SubscriptionResponse;
@@ -17,96 +18,98 @@ import com.insignia.subscription.service.SubscriptionServiceInterface;
 @RestController
 @RequestMapping("/subscriptions")
 public class SubscriptionSystemController {
-
-//	@Autowired
-//	private UserSubscriptionRepository userRepo;
 	
     @Autowired
     private SubscriptionServiceInterface subscriptionServiceInterface;
 
     @PostMapping("/create")
-    public SubscriptionResponse createSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
+    public ResponseEntity<?> createSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
     	
     	try {
-            return subscriptionServiceInterface.createSubscriptionPlan(subscriptionRequest);
-        } catch (SQLException e) {
+            return ResponseEntity.ok(subscriptionServiceInterface.createSubscriptionPlan(subscriptionRequest));
+        } catch (InvalidInputParametersException ex) {
             // Handle DataIntegrityViolationException (e.g., duplicate key)
-            SubscriptionResponse response = new SubscriptionResponse();
-            response.setSuccess(false);
-            response.setErrorCode(SubscriptionConstants.ERROR_CODE_DATA_INTEGRITY);
-            response.setErrorMessage(e.getMessage());
-            return response;
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(ex.getErrorCode(), ex.getStrMsg()));
         } 
+    	catch (Exception e) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(SubscriptionConstants.ERROR_CODE_UNEXPECTED_ERROR,
+    				SubscriptionConstants.ERROR_MESSAGE_UNEXPECTED_ERROR));
+    	}
+    	
     } 
     
     @PostMapping("/modify")
-    public SubscriptionResponse modifySubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
+    public ResponseEntity<?> modifySubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
     	try {
-    		return subscriptionServiceInterface.modifySubscriptionPlan(subscriptionRequest);
-        } catch (SQLException e) {
-            SubscriptionResponse response = new SubscriptionResponse();
-            response.setSuccess(false);
-            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
-            response.setErrorMessage(e.getMessage());
-            return response;
-        } 
-    }
-    
+    		return ResponseEntity.ok(subscriptionServiceInterface.modifySubscriptionPlan(subscriptionRequest));
+          }
+    	catch (InvalidInputParametersException ex) {
+            // Handle DataIntegrityViolationException (e.g., duplicate key)
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(ex.getErrorCode(), ex.getStrMsg()));
+        }    		
+    	catch (Exception e) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(SubscriptionConstants.ERROR_CODE_UNEXPECTED_ERROR,
+    				SubscriptionConstants.ERROR_MESSAGE_UNEXPECTED_ERROR));
+    	}
+    }   
+
     @PostMapping("/delete")
-    public SubscriptionResponse deleteSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
+    public ResponseEntity<?> deleteSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
     	
     	try {
-    		return subscriptionServiceInterface.deleteSubscriptionPlan(subscriptionRequest);
-    	} catch (SQLException e) {
-            SubscriptionResponse response = new SubscriptionResponse();
-            response.setSuccess(false);
-            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
-            response.setErrorMessage(e.getMessage());
-            return response;
-        } 
+    		return ResponseEntity.ok(subscriptionServiceInterface.deleteSubscriptionPlan(subscriptionRequest));
+    	} catch (InvalidInputParametersException ex) {
+            // Handle DataIntegrityViolationException (e.g., duplicate key)
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(ex.getErrorCode(), ex.getStrMsg()));
+        }
+    	catch (Exception e) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(SubscriptionConstants.ERROR_CODE_UNEXPECTED_ERROR,
+    				SubscriptionConstants.ERROR_MESSAGE_UNEXPECTED_ERROR));
+    	}
     }
     
     @PostMapping("/activate")
-    public SubscriptionResponse activateSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
+    public ResponseEntity<?> activateSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
     	
     	try {
-    		return subscriptionServiceInterface.activateSubscriptionPlan(subscriptionRequest);
-    	} catch (SQLException e) {
-            SubscriptionResponse response = new SubscriptionResponse();
-            response.setSuccess(false);
-            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
-            response.setErrorMessage(e.getMessage());
-            return response;
-        } 
+    		return ResponseEntity.ok(subscriptionServiceInterface.activateSubscriptionPlan(subscriptionRequest));
+    	} catch (InvalidInputParametersException ex) {
+            // Handle DataIntegrityViolationException (e.g., duplicate key)
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(ex.getErrorCode(), ex.getStrMsg()));
+        }
+    	catch (Exception e) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(SubscriptionConstants.ERROR_CODE_UNEXPECTED_ERROR,
+    				SubscriptionConstants.ERROR_MESSAGE_UNEXPECTED_ERROR));
+    	}
     }
     
     @PostMapping("/deactivate")
-    public SubscriptionResponse deactivateSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
+    public ResponseEntity<?> deactivateSubscriptionPlan(@RequestBody SubscriptionRequest subscriptionRequest) {
     	
     	try {
-    		return subscriptionServiceInterface.deactivateSubscriptionPlan(subscriptionRequest);
-    	} catch (SQLException e) {
-            SubscriptionResponse response = new SubscriptionResponse();
-            response.setSuccess(false);
-            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
-            response.setErrorMessage(e.getMessage());
-            return response;
-        } 
+    		return ResponseEntity.ok(subscriptionServiceInterface.deactivateSubscriptionPlan(subscriptionRequest));
+    	} catch (InvalidInputParametersException ex) {
+            // Handle DataIntegrityViolationException (e.g., duplicate key)
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(ex.getErrorCode(), ex.getStrMsg()));
+        }
+    	catch (Exception e) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(SubscriptionConstants.ERROR_CODE_UNEXPECTED_ERROR,
+    				SubscriptionConstants.ERROR_MESSAGE_UNEXPECTED_ERROR));
+    	}
     }
     
     @GetMapping("/find")
-    public SubscriptionResponse findDetailsByPlanId(@RequestBody SubscriptionRequest subscriptionRequest) {
-    	
-//    	try {
-//    		return subscriptionServiceInterface.deactivateSubscriptionPlan(subscriptionRequest);
-//    	} catch (SQLException e) {
-//            SubscriptionResponse response = new SubscriptionResponse();
-//            response.setSuccess(false);
-//            response.setErrorCode(SubscriptionConstants.ERROR_CODE_PLAN_NOT_FOUND);
-//            response.setErrorMessage(e.getMessage());
-//            return response;
-//        } 
-    	return subscriptionServiceInterface.findDetailsByPlanId(subscriptionRequest);
+    public ResponseEntity<?> findDetailsByPlanId(@RequestBody SubscriptionRequest subscriptionRequest) {   	
+    	try {
+    		return ResponseEntity.ok(subscriptionServiceInterface.findDetailsByPlanId(subscriptionRequest));
+    	} catch (InvalidInputParametersException ex) {
+            // Handle DataIntegrityViolationException (e.g., duplicate key)
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(ex.getErrorCode(), ex.getStrMsg()));
+        }
+    	catch (Exception e) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SubscriptionResponse(SubscriptionConstants.ERROR_CODE_UNEXPECTED_ERROR,
+    				SubscriptionConstants.ERROR_MESSAGE_UNEXPECTED_ERROR));
+    	}
     }
 }
 

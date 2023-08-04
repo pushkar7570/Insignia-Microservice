@@ -13,11 +13,14 @@ public class SubscriptionRequest {
     private String planId;
     private String planName;
     private String planDescription;
-    private int planDuration;
+    private Integer planDuration;
     private BigDecimal planPricing;
     private String planActivationStatus;
     private LocalDateTime planActivationDate;
+    private boolean isActivationDateNull;
+    private boolean isDeactivationDateNull;
     private LocalDateTime planDeactivationDate;
+    
 	public String getPlanId() {
 		return planId;
 	}
@@ -36,10 +39,10 @@ public class SubscriptionRequest {
 	public void setPlanDescription(String planDescription) {
 		this.planDescription = planDescription;
 	}
-	public int getPlanDuration() {
+	public Integer getPlanDuration() {
 		return planDuration;
 	}
-	public void setPlanDuration(int planDuration) {
+	public void setPlanDuration(Integer planDuration) {
 		this.planDuration = planDuration;
 	}
 	public BigDecimal getPlanPricing() {
@@ -58,14 +61,29 @@ public class SubscriptionRequest {
 		return planActivationDate;
 	}
 	public void setPlanActivationDate(LocalDateTime planActivationDate) {
-		this.planActivationDate = planActivationDate;
-	}
+            this.planActivationDate = planActivationDate;
+            this.isActivationDateNull = true;
+	}	
 	public LocalDateTime getPlanDeactivationDate() {
 		return planDeactivationDate;
 	}
 	public void setPlanDeactivationDate(LocalDateTime planDeactivationDate) {
-		this.planDeactivationDate = planDeactivationDate;
+		
+		if (planDeactivationDate != null) {
+	        this.planDeactivationDate = planDeactivationDate;
+	        this.isDeactivationDateNull = false;
+	    } else {
+	        this.isDeactivationDateNull = true;
+	    }
+	}		
+	public boolean isActivationDateNull() {
+		return isActivationDateNull;
 	}
+	public boolean isDeactivationDateNull() {
+		return isDeactivationDateNull;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "SubscriptionRequest [planId=" + planId + ", planName=" + planName + ", planDescription="

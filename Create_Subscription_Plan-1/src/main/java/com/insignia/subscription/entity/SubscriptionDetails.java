@@ -55,7 +55,7 @@ import lombok.NoArgsConstructor;
         // Default constructor
     }
 
-    public SubscriptionDetails(String planId, String planName, String planDescription, int planDuration,
+    public SubscriptionDetails(String planId, String planName, String planDescription, Integer planDuration,
             BigDecimal planPricing, String planActivationStatus, LocalDateTime planActivationDate,
             LocalDateTime planDeactivationDate) {
         this.planId = planId;
@@ -92,11 +92,11 @@ import lombok.NoArgsConstructor;
         this.planDescription = planDescription;
     }
 
-    public int getPlanDuration() {
+    public Integer getPlanDuration() {
         return planDuration;
     }
 
-    public void setPlanDuration(int planDuration) {
+    public void setPlanDuration(Integer planDuration) {
         this.planDuration = planDuration;
     }
 

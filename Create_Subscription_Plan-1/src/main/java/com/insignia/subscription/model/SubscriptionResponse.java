@@ -8,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class SubscriptionResponse {
     private boolean success;
     private boolean deleteStatus;
-    private int errorCode;
+    private String errorCode;
     private String errorMessage;
     private String planId;
     private String planName;
     private String planDescription;
-    private int planDuration;
+    private Integer planDuration;
     private BigDecimal planPricing;
     private String planActivationStatus;
     private LocalDateTime planActivationDate;
@@ -24,10 +24,10 @@ public class SubscriptionResponse {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	public int getErrorCode() {
+	public String getErrorCode() {
 		return errorCode;
 	}
-	public void setErrorCode(int errorCode) {
+	public void setErrorCode(String errorCode) {
 		this.errorCode = errorCode;
 	}
 	public String getErrorMessage() {
@@ -54,10 +54,10 @@ public class SubscriptionResponse {
 	public void setPlanDescription(String planDescription) {
 		this.planDescription = planDescription;
 	}
-	public int getPlanDuration() {
+	public Integer getPlanDuration() {
 		return planDuration;
 	}
-	public void setPlanDuration(int planDuration) {
+	public void setPlanDuration(Integer planDuration) {
 		this.planDuration = planDuration;
 	}
 	public BigDecimal getPlanPricing() {
@@ -90,12 +90,30 @@ public class SubscriptionResponse {
 	public void setDeleteStatus(boolean deleteStatus) {
 		this.deleteStatus = deleteStatus;
 	}
+	public SubscriptionResponse(String errorCode, String errorMessage) {
+		super();
+		this.errorCode = errorCode;
+		this.errorMessage = errorMessage;
+	}
+	
+	public SubscriptionResponse() {
+		
+	}
+	
 	@Override
 	public String toString() {
-		return "SubscriptionResponse [success=" + success + ", errorCode=" + errorCode + ", errorMessage="
-				+ errorMessage + ", planId=" + planId + ", planName=" + planName + ", planDescription="
-				+ planDescription + ", planDuration=" + planDuration + ", planPricing=" + planPricing
-				+ ", planActivationStatus=" + planActivationStatus + ", planActivationDate=" + planActivationDate
-				+ ", planDeactivationDate=" + planDeactivationDate + "]";
+		return "SubscriptionResponse [success=" + success + ", deleteStatus=" + deleteStatus + ", errorCode="
+				+ errorCode + ", errorMessage=" + errorMessage + ", planId=" + planId + ", planName=" + planName
+				+ ", planDescription=" + planDescription + ", planDuration=" + planDuration + ", planPricing="
+				+ planPricing + ", planActivationStatus=" + planActivationStatus + ", planActivationDate="
+				+ planActivationDate + ", planDeactivationDate=" + planDeactivationDate + ", isSuccess()=" + isSuccess()
+				+ ", getErrorCode()=" + getErrorCode() + ", getErrorMessage()=" + getErrorMessage() + ", getPlanId()="
+				+ getPlanId() + ", getPlanName()=" + getPlanName() + ", getPlanDescription()=" + getPlanDescription()
+				+ ", getPlanDuration()=" + getPlanDuration() + ", getPlanPricing()=" + getPlanPricing()
+				+ ", getPlanActivationStatus()=" + getPlanActivationStatus() + ", getPlanActivationDate()="
+				+ getPlanActivationDate() + ", getPlanDeactivationDate()=" + getPlanDeactivationDate()
+				+ ", isDeleteStatus()=" + isDeleteStatus() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+	
 }
