@@ -1,4 +1,4 @@
-package com.insignia.subscription.entity;
+package com.insignia.entity;
 
 
 import jakarta.persistence.Table;

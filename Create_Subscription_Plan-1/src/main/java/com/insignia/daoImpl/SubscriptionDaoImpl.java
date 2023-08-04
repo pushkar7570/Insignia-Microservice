@@ -1,4 +1,4 @@
-package com.insignia.subscription.daoImpl;
+package com.insignia.daoImpl;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
+import com.insignia.constants.SubscriptionConstants;
 import com.insignia.customExceptions.InvalidInputParametersException;
-import com.insignia.subscription.constants.SubscriptionConstants;
-import com.insignia.subscription.dao.SubscriptionDaoInterface;
-import com.insignia.subscription.entity.SubscriptionDetails;
-import com.insignia.subscription.model.SubscriptionRequest;
-import com.insignia.subscription.model.SubscriptionResponse;
-import com.insignia.subscription.repo.UserSubscriptionRepository;
+import com.insignia.dao.SubscriptionDaoInterface;
+import com.insignia.entity.SubscriptionDetails;
+import com.insignia.model.SubscriptionRequest;
+import com.insignia.model.SubscriptionResponse;
+import com.insignia.repo.UserSubscriptionRepository;
 
 import jakarta.transaction.Transactional;
 

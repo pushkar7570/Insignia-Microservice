@@ -1,4 +1,4 @@
-package com.insignia.subscription.repo;
+package com.insignia.repo;
 
 import java.math.BigDecimal;
 //import java.util.List;
@@ -14,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.insignia.subscription.entity.SubscriptionDetails;
+import com.insignia.entity.SubscriptionDetails;
 
 
 @Repository

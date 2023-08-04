@@ -1,11 +1,11 @@
-package com.insignia.subscription.service;
+package com.insignia.dao;
 
 import com.insignia.customExceptions.InvalidInputParametersException;
-import com.insignia.subscription.model.SubscriptionRequest;
-import com.insignia.subscription.model.SubscriptionResponse;
+import com.insignia.model.SubscriptionRequest;
+import com.insignia.model.SubscriptionResponse;
 
-public interface SubscriptionServiceInterface {
-	
+public interface SubscriptionDaoInterface {
+
 	public SubscriptionResponse createSubscriptionPlan(SubscriptionRequest subscriptionRequest) throws InvalidInputParametersException;
 	public SubscriptionResponse modifySubscriptionPlan(SubscriptionRequest subscriptionRequest) throws InvalidInputParametersException;
 	public SubscriptionResponse deleteSubscriptionPlan(SubscriptionRequest subscriptionRequest) throws InvalidInputParametersException;

@@ -1,4 +1,4 @@
-package com.insignia.subscription.model;
+package com.insignia.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

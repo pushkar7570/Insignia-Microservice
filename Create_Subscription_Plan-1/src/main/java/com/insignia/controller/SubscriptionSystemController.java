@@ -1,4 +1,4 @@
-package com.insignia.subscription.controller;
+package com.insignia.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.insignia.constants.SubscriptionConstants;
 import com.insignia.customExceptions.InvalidInputParametersException;
-import com.insignia.subscription.constants.SubscriptionConstants;
-import com.insignia.subscription.model.SubscriptionRequest;
-import com.insignia.subscription.model.SubscriptionResponse;
-import com.insignia.subscription.service.SubscriptionServiceInterface;
+import com.insignia.model.SubscriptionRequest;
+import com.insignia.model.SubscriptionResponse;
+import com.insignia.service.SubscriptionServiceInterface;
 
 @RestController
 @RequestMapping("/subscriptions")

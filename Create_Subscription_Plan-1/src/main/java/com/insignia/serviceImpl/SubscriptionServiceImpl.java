@@ -1,13 +1,13 @@
-package com.insignia.subscription.serviceImpl;
+package com.insignia.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.insignia.customExceptions.InvalidInputParametersException;
-import com.insignia.subscription.dao.SubscriptionDaoInterface;
-import com.insignia.subscription.model.SubscriptionRequest;
-import com.insignia.subscription.model.SubscriptionResponse;
-import com.insignia.subscription.service.SubscriptionServiceInterface;
+import com.insignia.dao.SubscriptionDaoInterface;
+import com.insignia.model.SubscriptionRequest;
+import com.insignia.model.SubscriptionResponse;
+import com.insignia.service.SubscriptionServiceInterface;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionServiceInterface{

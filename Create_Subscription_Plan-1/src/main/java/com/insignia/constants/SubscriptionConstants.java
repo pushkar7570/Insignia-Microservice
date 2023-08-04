@@ -1,4 +1,4 @@
-package com.insignia.subscription.constants;
+package com.insignia.constants;
 
 public class SubscriptionConstants {
 	//Success message
